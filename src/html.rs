@@ -6,11 +6,19 @@ body {
     font-weight: 300;
     background-color: #fcf5f5;
     color: #222;
-    margin: 0 64px;
+    margin: 0 16px;
+    display: flex;
+    justify-content: center;
 }
 blockquote {
     color: #555;
     font-size: 16px;
+}
+@media (min-width: 710px) {
+    main {
+        max-width: 710px;
+        marign: 0 64px;
+    }
 }
 "#;
 
@@ -26,7 +34,7 @@ r#"
         <style>{}</style>
     </head>
     <body>
-        {}
+        <main>{}</main>
     </body>
 </html>
 "#,
