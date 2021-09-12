@@ -64,6 +64,11 @@ impl Args {
         )
     }
 
+    pub fn input_filename(&self) -> String {
+        let (_, filename) = extract_filename(&self.input);
+        filename
+    }
+
     pub fn opt_verbose(&self) -> bool {
         self.options.contains(&String::from("-v"))
         || self.options.contains(&String::from("--verbose"))

@@ -1,22 +1,21 @@
 mod args;
 mod utils;
+mod html;
 
 use std::fs;
-
-use comrak::{self, ComrakOptions};
 
 use args::Args;
 
 fn main() {
 
-    let args = Args::parse();
+    let mut args = Args::parse();
 
     let input_content = fs::read_to_string(args.input.to_string()).unwrap_or_else(|err| {
         eprintln!("An error occurred when reading the input file: {}", err);
         std::process::exit(1);
     });
 
-    let html = comrak::markdown_to_html(&input_content, &ComrakOptions::default());
+    let html_content = html::md_to_html(&args.input_filename(), &input_content);
 
     let outdir = std::path::Path::new(&args.output_dir);
 
@@ -36,7 +35,11 @@ fn main() {
         });
     }
 
-    fs::write(args.output(), html).unwrap_or_else(|err| {
+    if args.output_file == ".html".to_string() {
+        args.output_file = format!("{}", args.input_filename());
+    }
+
+    fs::write(args.output(), html_content).unwrap_or_else(|err| {
         if args.opt_verbose() {
             eprintln!(
                 "{}\n{:?}\n{}",
