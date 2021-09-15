@@ -1,5 +1,5 @@
 [package]
-name = "markdown_notes"
+name = "md_notes"
 version = "0.1.0"
 authors = ["jacobalbright"]
 edition = "2018"

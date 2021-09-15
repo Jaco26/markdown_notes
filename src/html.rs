@@ -23,6 +23,8 @@ blockquote {
 "#;
 
 pub fn md_to_html(title: &str, body_content: &str) -> String {
+    let mut options = comrak::ComrakOptions::default();
+    options.extension.header_ids = Some("".to_string());
     format!(
 r#"
 <!DOCTYPE html>
@@ -42,7 +44,7 @@ r#"
         STYLES,
         comrak::markdown_to_html(
             &body_content,
-            &comrak::ComrakOptions::default()
+            &options
         )
     )
 }
