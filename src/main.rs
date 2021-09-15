@@ -15,7 +15,9 @@ fn main() {
         std::process::exit(1);
     });
 
-    let html_content = html::md_to_html(&args.input_filename(), &input_content);
+    let input_filename = args.input_filename().replace(".html", "");
+
+    let html_content = html::md_to_html(&input_filename, &input_content);
 
     let outdir = std::path::Path::new(&args.output_dir);
 
