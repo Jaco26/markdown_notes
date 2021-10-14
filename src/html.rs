@@ -20,7 +20,7 @@ hr {
     border-color: #aeaeae;
 }
 code {
-    font-size: 16px;
+    font-size: 14px;
     background: #f0e9ec;
     padding: 2px;
     border-radius: 4px;
