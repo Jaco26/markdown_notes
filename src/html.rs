@@ -14,6 +14,11 @@ blockquote {
     color: #555;
     font-size: 16px;
 }
+hr {
+    border-bottom: none;
+    margin: 40px 0;
+    border-color: #aeaeae;
+}
 @media (min-width: 710px) {
     main {
         max-width: 710px;
