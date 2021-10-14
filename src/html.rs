@@ -19,6 +19,13 @@ hr {
     margin: 40px 0;
     border-color: #aeaeae;
 }
+code {
+    font-size: 16px;
+    background: #f0e9ec;
+    padding: 2px;
+    border-radius: 4px;
+    color: #004297;
+}
 @media (min-width: 710px) {
     main {
         max-width: 710px;
