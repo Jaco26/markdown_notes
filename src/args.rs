@@ -63,7 +63,7 @@ impl Args {
             "{}{}{}",
             self.output_dir,
             std::path::MAIN_SEPARATOR.to_string(),
-            self.input_filename().replace(".md", "to").replace(".txt", "")
+            self.input_filename().replace(".md", "").replace(".txt", "")
         )
     }
 
