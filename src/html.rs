@@ -23,7 +23,13 @@ a {
     font: inherit;
 }
 a:visited {
-    color:rgb(58, 128, 131);
+    color: rgb(58, 128, 131);
+}
+.theme--dark a {
+    color: rgb(98, 168, 171);
+}
+.theme--dark a:visited {
+    color: rgb(98, 168, 171);
 }
 strong {
     font-weight: bold;
@@ -117,6 +123,12 @@ themeSelect.addEventListener('change', onChangeThemeSelect);
 onPageLoad();
 
 function onPageLoad() {
+
+    document.querySelectorAll('a').forEach(anchorElement => {
+        anchorElement.setAttribute('target', '_blank');
+        anchorElement.setAttribute('rel', 'noopener noreferrer');
+    });
+
     let savedTheme = getSavedTheme();
     if (!savedTheme) {
         setSavedTheme(DEFAULT_THEME);
