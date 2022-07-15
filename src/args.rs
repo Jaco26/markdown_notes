@@ -1,4 +1,6 @@
 
+use std::{collections::HashMap};
+
 use crate::utils::extract_filename;
 
 #[derive(Debug)]
@@ -6,7 +8,7 @@ pub struct Args {
     pub input: String,
     pub output_dir: String,
     pub output_file: String,
-    pub options: Vec<String>,
+    pub is_verbose: bool,
 }
 
 
@@ -17,40 +19,41 @@ impl Args {
             input: String::new(),
             output_dir: String::from("./output"),
             output_file: String::new(),
-            options: Vec::new(),
+            is_verbose: false,
         };
 
         let mut env_args = std::env::args();
 
         env_args.next();
 
-        match env_args.next() {
-            Some(input) => {
-                args.input = input;
-                let output = env_args.next();
+        let mut options_map: HashMap<String, String> = HashMap::new();
+        let mut flags_map: HashMap<String, bool> = HashMap::new();
 
-                match output {
-                    Some(output) => {
-                        if output.starts_with("-") {
-                            let (_, filename) = extract_filename(&args.input);
-                            args.output_file = filename;
-                            args.options.push(output);
-                        } else {
-                            let (dirs_path, filename) = extract_filename(&output);
-                            args.output_file = filename;
-                            args.output_dir = dirs_path;
-                        }
-                    }
-                    None => {
-                        let (_, filename) = extract_filename(&args.input);
-                        args.output_file = filename;
-                    }
-                }
+        let options = vec!["-i", "-o"];
+
+        while let Some(arg) = env_args.next() {
+            if options.contains(&arg.as_str()) {
+                let option_value = match env_args.next() {
+                    Some(value) => value,
+                    None => String::new(),
+                };
+                options_map.insert(arg, option_value);
+            } else {
+                flags_map.insert(arg, true);
             }
-            None => {}
-        };
+        }
 
-        args.options = vec![args.options, env_args.collect()].concat();
+        if let Some(input_filename) = options_map.get("-i") {
+            args.input = input_filename.to_string();
+        }
+
+        if let Some(output_dir) = options_map.get("-o") {
+            args.output_dir = output_dir.to_string();
+        } else if let Some(output_dir) = std::env::var("MD_NOTES_OUTDIR").ok() {
+            args.output_dir = output_dir;
+        }
+
+        args.is_verbose = flags_map.contains_key("-v");
 
         args
     }
@@ -60,18 +63,13 @@ impl Args {
             "{}{}{}",
             self.output_dir,
             std::path::MAIN_SEPARATOR.to_string(),
-            self.output_file
+            self.input_filename().replace(".md", "to").replace(".txt", "")
         )
     }
 
     pub fn input_filename(&self) -> String {
         let (_, filename) = extract_filename(&self.input);
         filename
-    }
-
-    pub fn opt_verbose(&self) -> bool {
-        self.options.contains(&String::from("-v"))
-        || self.options.contains(&String::from("--verbose"))
     }
 
 }
