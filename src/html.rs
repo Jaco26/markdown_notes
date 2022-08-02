@@ -42,8 +42,15 @@ code {
     color: #004297;
 }
 blockquote {
+    margin: 0;
+    padding-left: 20px;
     color: #555;
     font-size: 16px;
+    border-left: 4px solid #555;
+}
+.theme--dark blockquote {
+    color: #ccc;
+    border-color: #aaa;
 }
 hr {
     border-bottom: none;
@@ -125,6 +132,9 @@ onPageLoad();
 function onPageLoad() {
 
     document.querySelectorAll('a').forEach(anchorElement => {
+        if (anchorElement.getAttribute('href').startsWith('#')) {
+            return;
+        }
         anchorElement.setAttribute('target', '_blank');
         anchorElement.setAttribute('rel', 'noopener noreferrer');
     });
