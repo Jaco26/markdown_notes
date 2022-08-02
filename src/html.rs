@@ -5,14 +5,14 @@ const STYLES: &str = r#"
     box-sizing: border-box;
 }
 body {
-    line-height: 1.3;
+    color: #222;
+    display: flex;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 18px;
     font-weight: 300;
-    color: #222;
-    margin: 0 16px;
-    display: flex;
     justify-content: center;
+    line-height: 1.3;
+    margin: 0 16px;
 }
 main {
     padding: 0 32px;
@@ -35,27 +35,27 @@ strong {
     font-weight: bold;
 }
 code {
-    font-size: 14px;
     background: #f0e9ec;
-    padding: 2px;
     border-radius: 4px;
     color: #004297;
+    font-size: 14px;
+    padding: 2px;
 }
 blockquote {
+    border-left: 4px solid #aaa;
+    color: #444;
+    font-size: 16px;
     margin: 0;
     padding-left: 20px;
-    color: #555;
-    font-size: 16px;
-    border-left: 4px solid #555;
 }
 .theme--dark blockquote {
-    color: #ccc;
     border-color: #aaa;
+    color: #ccc;
 }
 hr {
     border-bottom: none;
-    margin: 40px 0;
     border-color: #aeaeae;
+    margin: 40px 0;
 }
 .toolbar {
     display: flex;
@@ -63,8 +63,8 @@ hr {
     padding: 4px 0;
 }
 .theme--light {
-    background-color: #efefef;
     color: #333333;
+    background-color: #efefef;
 }
 .theme--dark {
     background-color: #223;
@@ -77,8 +77,8 @@ hr {
 .md h5,
 .md h6,
 .md p {
-    margin: 20px 0;
     line-height: 1.4;
+    margin: 20px 0;
 }
 .md p img {
     width: 100%;
@@ -103,16 +103,16 @@ hr {
     text-decoration: none;
 }
 .md blockquote {
+    border-left: 4px solid #ccc;
+    border-radius: 2px;
     color: #555;
     margin: 16px 4px;
     padding: 0 16px;
-    border-left: 4px solid #ccc;
-    border-radius: 2px;
 }
 .md code {
     background-color: #eee;
-    padding: 2px;
     border-radius: 2px;
+    padding: 2px;
 }
 .md li {
     margin: 4px 0;
